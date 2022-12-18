@@ -13,77 +13,77 @@
         android:theme="@style/Theme.NE_Aplicacion_Movil"
         tools:targetApi="31">
         <activity
-            android:name=".EditarTipoProveedor"
+            android:name=".editar.EditarTipoProveedor"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".EditarProveedor"
+            android:name=".editar.EditarProveedor"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".EditarEstadoRegistro"
+            android:name=".editar.EditarEstadoRegistro"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".EditarPais"
+            android:name=".editar.EditarPais"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AnadirProveedor"
+            android:name=".anadir.AnadirProveedor"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AnadirTipoProveedor"
+            android:name=".anadir.AnadirTipoProveedor"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AnadirEstadoRegistro"
+            android:name=".anadir.AnadirEstadoRegistro"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".TablaProveedor"
+            android:name=".tablas.TablaProveedor"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".TablaTipoProveedor"
+            android:name=".tablas.TablaTipoProveedor"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".TablaEstadoRegistro"
+            android:name=".tablas.TablaEstadoRegistro"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".TablaPais"
+            android:name=".tablas.TablaPais"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -97,7 +97,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".AnadirPais"
+            android:name=".anadir.AnadirPais"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

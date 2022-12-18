@@ -1,4 +1,4 @@
-package com.example.ne_aplicacion_movil;
+package com.example.ne_aplicacion_movil.tablas;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,105 +19,103 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.ne_aplicacion_movil.adaptadores.ListaEstadoRegistroAdapter;
-import com.example.ne_aplicacion_movil.adaptadores.ListaPaisesAdapter;
-import com.example.ne_aplicacion_movil.adaptadores.ListaProveedoresAdapter;
-import com.example.ne_aplicacion_movil.db.DbEstadoRegistro;
-import com.example.ne_aplicacion_movil.db.DbPaises;
-import com.example.ne_aplicacion_movil.db.DbProveedores;
-import com.example.ne_aplicacion_movil.entidades.Paises;
-import com.example.ne_aplicacion_movil.entidades.Proveedores;
+import com.example.ne_aplicacion_movil.anadir.AnadirTipoProveedor;
+import com.example.ne_aplicacion_movil.editar.EditarTipoProveedor;
+import com.example.ne_aplicacion_movil.R;
+import com.example.ne_aplicacion_movil.adaptadores.ListaTipoProveedorAdapter;
+import com.example.ne_aplicacion_movil.db.DbTipoProveedores;
+import com.example.ne_aplicacion_movil.entidades.TipoProveedores;
 import com.example.ne_aplicacion_movil.utils.SpacingItemDecoder;
 
 import java.util.ArrayList;
 
-public class TablaProveedor extends AppCompatActivity implements SearchView.OnQueryTextListener{
-    RecyclerView listaProveedor;
-    ArrayList<Proveedores> listaArrayProveedor;
-    Button botonTablaProveedorHabilitar,
-            botonTablaProveedorInhabilitar,
-            botonTablaProveedorEditar,
-            botonTablaProveedorEliminar,
-            botonTablaProveedorCancelar;
+public class TablaTipoProveedor extends AppCompatActivity implements SearchView.OnQueryTextListener{
+    RecyclerView listaTipoProveedor;
+    ArrayList<TipoProveedores> listaArrayTipoProveedor;
+    Button botonTablaTipoProveedorHabilitar,
+            botonTablaTipoProveedorInhabilitar,
+            botonTablaTipoProveedorEditar,
+            botonTablaTipoProveedorEliminar,
+            botonTablaTipoProveedorCancelar;
 
-    SearchView txtBuscarProveedor;
-    ListaProveedoresAdapter adapter;
+    SearchView txtBuscarTipoProveedor;
+    ListaTipoProveedorAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tabla_proveedor);
+        setContentView(R.layout.activity_tabla_tipo_proveedor);
 
-        txtBuscarProveedor=findViewById(R.id.txtBuscarProveedor);
-        botonTablaProveedorHabilitar=findViewById(R.id.botonTablaProveedorHabilitar);
-        botonTablaProveedorInhabilitar=findViewById(R.id.botonTablaProveedorInhabilitar);
-        botonTablaProveedorEditar=findViewById(R.id.botonTablaProveedorEditar);
-        botonTablaProveedorEliminar=findViewById(R.id.botonTablaProveedorEliminar);
-        botonTablaProveedorCancelar=findViewById(R.id.botonTablaProveedorCancelar);
+        txtBuscarTipoProveedor=findViewById(R.id.txtBuscarTipoProveedor);
+        botonTablaTipoProveedorHabilitar=findViewById(R.id.botonTablaTipoProveedorHabilitar);
+        botonTablaTipoProveedorInhabilitar=findViewById(R.id.botonTablaTipoProveedorInhabilitar);
+        botonTablaTipoProveedorEditar=findViewById(R.id.botonTablaTipoProveedorEditar);
+        botonTablaTipoProveedorEliminar=findViewById(R.id.botonTablaTipoProveedorEliminar);
+        botonTablaTipoProveedorCancelar=findViewById(R.id.botonTablaTipoProveedorCancelar);
 
-        listaProveedor=findViewById(R.id.listaProveedores);
-        listaProveedor.setLayoutManager(new LinearLayoutManager(this));
+        listaTipoProveedor=findViewById(R.id.listaTipoProveedores);
+        listaTipoProveedor.setLayoutManager(new LinearLayoutManager(this));
         SpacingItemDecoder itemDecoder= new SpacingItemDecoder(10);
-        listaProveedor.addItemDecoration(itemDecoder);
-        DbProveedores dbProveedores=new DbProveedores(TablaProveedor.this);
-        listaArrayProveedor=new ArrayList<Proveedores>();
-        adapter=new ListaProveedoresAdapter(dbProveedores.mostrarProveedores());
-        listaProveedor.setAdapter(adapter);
+        listaTipoProveedor.addItemDecoration(itemDecoder);
+        DbTipoProveedores dbTipoProveedores=new DbTipoProveedores(TablaTipoProveedor.this);
+        listaArrayTipoProveedor=new ArrayList<TipoProveedores>();
+        adapter=new ListaTipoProveedorAdapter(dbTipoProveedores.mostrarTiposProveedores());
+        listaTipoProveedor.setAdapter(adapter);
 
-        botonTablaProveedorHabilitar.setOnClickListener(new View.OnClickListener() {
+        botonTablaTipoProveedorHabilitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(adapter.getSelected() != null){
                     Log.d("INFO",adapter.getSelected().toString());
-                    dbProveedores.habilitarRegistro(adapter.getSelected().getId());
+                    dbTipoProveedores.habilitarRegistro(adapter.getSelected().getId());
                 } else {
-                    Toast.makeText(TablaProveedor.this, "No selection",Toast.LENGTH_LONG).show();
+                    Toast.makeText(TablaTipoProveedor.this, "No selection",Toast.LENGTH_LONG).show();
+                }
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaTipoProveedorInhabilitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(adapter.getSelected() != null){
+                    Log.d("INFO",adapter.getSelected().toString());
+                    dbTipoProveedores.inhabilitarRegistro(adapter.getSelected().getId());
+                } else {
+                    Toast.makeText(TablaTipoProveedor.this, "No selection",Toast.LENGTH_LONG).show();
                 }
                 actualizarDatos();
             }
         });
 
-        botonTablaProveedorInhabilitar.setOnClickListener(new View.OnClickListener() {
+        botonTablaTipoProveedorEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(adapter.getSelected() != null){
-                    Log.d("INFO",adapter.getSelected().toString());
-                    dbProveedores.inhabilitarRegistro(adapter.getSelected().getId());
-                } else {
-                    Toast.makeText(TablaProveedor.this, "No selection",Toast.LENGTH_LONG).show();
-                }
-                actualizarDatos();
-            }
-        });
-
-        botonTablaProveedorEditar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
                 if(adapter.getSelected() != null){
                     Log.d("INFO",adapter.getSelected().toString());
                     Context context= view.getContext();
-                    Intent intent=new Intent(context, EditarProveedor.class);
+                    Intent intent=new Intent(context, EditarTipoProveedor.class);
                     intent.putExtra("ID",adapter.getSelected().getId());
                     startActivityForResult(intent,0);
                 } else {
-                    Toast.makeText(TablaProveedor.this, "No selection",Toast.LENGTH_LONG).show();
+                    Toast.makeText(TablaTipoProveedor.this, "No selection",Toast.LENGTH_LONG).show();
                 }
             }
         });
 
-        botonTablaProveedorEliminar.setOnClickListener(new View.OnClickListener() {
+        botonTablaTipoProveedorEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(adapter.getSelected() != null){
                     Log.d("INFO",adapter.getSelected().toString());
 
-                    AlertDialog.Builder builder= new AlertDialog.Builder(TablaProveedor.this);
-                    builder.setMessage("¿Desea eliminar este Proveedor?")
+                    AlertDialog.Builder builder= new AlertDialog.Builder(TablaTipoProveedor.this);
+                    builder.setMessage("¿Desea eliminar este Tipo Proveedor?")
                             .setPositiveButton("SI", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    if( dbProveedores.eliminarRegistro(adapter.getSelected().getId())){
+                                    if(dbTipoProveedores.eliminarRegistro(adapter.getSelected().getId())){
                                         actualizarDatos();
                                     }
                                 }
@@ -128,43 +126,41 @@ public class TablaProveedor extends AppCompatActivity implements SearchView.OnQu
 
                                 }
                             }).show();
-
-
                 } else {
-                    Toast.makeText(TablaProveedor.this, "No selection",Toast.LENGTH_LONG).show();
+                    Toast.makeText(TablaTipoProveedor.this, "No selection",Toast.LENGTH_LONG).show();
                 }
                 actualizarDatos();
             }
         });
 
-        botonTablaProveedorCancelar.setOnClickListener(new View.OnClickListener() {
+        botonTablaTipoProveedorCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-        txtBuscarProveedor.setOnQueryTextListener(this);
+        txtBuscarTipoProveedor.setOnQueryTextListener(this);
 
     }
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_tabla_proveedor,menu);
+        inflater.inflate(R.menu.menu_tabla_tipo_proveedor,menu);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
-            case R.id.menuProveedorAnadir:
+            case R.id.menuTipoProveedorAnadir:
                 Log.d("INFO","ANADIR ESTADO REGISTRO");
-                anadirRegistroProveedor();
+                anadirRegistroTipoProveedor();
                 return true;
             default:
                 Log.d("INFO","NO ENTRASTE PERRO");
                 return super.onOptionsItemSelected(item);
         }
     }
-    private void anadirRegistroProveedor(){
-        Intent intent=new Intent(this, AnadirProveedor.class);
+    private void anadirRegistroTipoProveedor(){
+        Intent intent=new Intent(this, AnadirTipoProveedor.class);
         startActivityForResult(intent,0);
     }
 
@@ -177,9 +173,9 @@ public class TablaProveedor extends AppCompatActivity implements SearchView.OnQu
     }
 
     private void actualizarDatos(){
-        DbProveedores dbProveedores=new DbProveedores(TablaProveedor.this);
-        ListaProveedoresAdapter adapter=new ListaProveedoresAdapter(dbProveedores.mostrarProveedores());
-        listaProveedor.setAdapter(adapter);
+        DbTipoProveedores dbTipoProveedores=new DbTipoProveedores(TablaTipoProveedor.this);
+        ListaTipoProveedorAdapter adapter=new ListaTipoProveedorAdapter(dbTipoProveedores.mostrarTiposProveedores());
+        listaTipoProveedor.setAdapter(adapter);
     }
 
     @Override

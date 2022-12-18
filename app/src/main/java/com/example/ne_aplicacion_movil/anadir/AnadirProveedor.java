@@ -1,4 +1,4 @@
-package com.example.ne_aplicacion_movil;
+package com.example.ne_aplicacion_movil.anadir;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,10 +9,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.ne_aplicacion_movil.R;
 import com.example.ne_aplicacion_movil.adaptadoresSpinner.EstadoRegistroAdapterSpinner;
 import com.example.ne_aplicacion_movil.adaptadoresSpinner.PaisAdapterSpinner;
 import com.example.ne_aplicacion_movil.adaptadoresSpinner.TipoProveedorAdapterSpinner;
-import com.example.ne_aplicacion_movil.db.DbPaises;
 import com.example.ne_aplicacion_movil.db.DbProveedores;
 import com.example.ne_aplicacion_movil.entidades.EstadoRegistro;
 import com.example.ne_aplicacion_movil.entidades.Paises;

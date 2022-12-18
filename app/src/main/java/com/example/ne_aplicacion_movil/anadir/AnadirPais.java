@@ -1,8 +1,7 @@
-package com.example.ne_aplicacion_movil;
+package com.example.ne_aplicacion_movil.anadir;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,10 +10,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.ne_aplicacion_movil.adaptadores.ListaPaisesAdapter;
+import com.example.ne_aplicacion_movil.R;
 import com.example.ne_aplicacion_movil.adaptadoresSpinner.EstadoRegistroAdapterSpinner;
 import com.example.ne_aplicacion_movil.db.DbPaises;
-import com.example.ne_aplicacion_movil.db.DbProveedores;
 import com.example.ne_aplicacion_movil.entidades.EstadoRegistro;
 
 import java.util.List;

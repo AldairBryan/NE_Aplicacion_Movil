@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.ne_aplicacion_movil.tablas.TablaEstadoRegistro;
+import com.example.ne_aplicacion_movil.tablas.TablaPais;
+import com.example.ne_aplicacion_movil.tablas.TablaProveedor;
+import com.example.ne_aplicacion_movil.tablas.TablaTipoProveedor;
+
 public class SeleccionarTabla extends AppCompatActivity {
 
     Button botonPais,botonTipoProveedor,botonProveedor,botonEstadoRegistro;
@@ -24,14 +29,14 @@ public class SeleccionarTabla extends AppCompatActivity {
         botonEstadoRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentEstadoRegistro= new Intent(getApplicationContext(),TablaEstadoRegistro.class);
+                Intent intentEstadoRegistro= new Intent(getApplicationContext(), TablaEstadoRegistro.class);
                 startActivity(intentEstadoRegistro);
             }
         });
         botonPais.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentTablaPais= new Intent(getApplicationContext(),TablaPais.class);
+                Intent intentTablaPais= new Intent(getApplicationContext(), TablaPais.class);
                 startActivity(intentTablaPais);
             }
         });
@@ -39,7 +44,7 @@ public class SeleccionarTabla extends AppCompatActivity {
         botonTipoProveedor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentTipoProveedor= new Intent(getApplicationContext(),TablaTipoProveedor.class);
+                Intent intentTipoProveedor= new Intent(getApplicationContext(), TablaTipoProveedor.class);
                 startActivity(intentTipoProveedor);
             }
         });
@@ -47,7 +52,7 @@ public class SeleccionarTabla extends AppCompatActivity {
         botonProveedor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentProveedor= new Intent(getApplicationContext(),TablaProveedor.class);
+                Intent intentProveedor= new Intent(getApplicationContext(), TablaProveedor.class);
                 startActivity(intentProveedor);
             }
         });

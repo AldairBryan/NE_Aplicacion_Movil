@@ -1,4 +1,4 @@
-package com.example.ne_aplicacion_movil;
+package com.example.ne_aplicacion_movil.anadir;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,8 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.ne_aplicacion_movil.R;
 import com.example.ne_aplicacion_movil.db.DbEstadoRegistro;
-import com.example.ne_aplicacion_movil.db.DbProveedores;
 
 public class AnadirEstadoRegistro extends AppCompatActivity {
     EditText txtEstadoRegistro;

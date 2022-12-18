@@ -1,66 +1,93 @@
-package com.example.ne_aplicacion_movil;
+package com.example.ne_aplicacion_movil.editar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ne_aplicacion_movil.R;
 import com.example.ne_aplicacion_movil.adaptadoresSpinner.EstadoRegistroAdapterSpinner;
-import com.example.ne_aplicacion_movil.db.DbPaises;
-import com.example.ne_aplicacion_movil.db.DbProveedores;
 import com.example.ne_aplicacion_movil.db.DbTipoProveedores;
 import com.example.ne_aplicacion_movil.entidades.EstadoRegistro;
+import com.example.ne_aplicacion_movil.entidades.TipoProveedores;
 
 import java.util.List;
 
-public class AnadirTipoProveedor extends AppCompatActivity {
+public class EditarTipoProveedor extends AppCompatActivity {
+
     EditText txtTipoProveedor;
     Button botonInsertarTipoProveedor,botonCancelarAnadirTipoProveedor;
     Spinner spinnerAnadirTipoProveedorER;
+
+    TipoProveedores tipoProveedores;
+    int id=0;
+    boolean correcto=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anadir_tipo_proveedor);
+
         txtTipoProveedor=findViewById(R.id.textNombreTipoProveedor);
         botonInsertarTipoProveedor=findViewById(R.id.botonInsertarTipoProveedor);
         botonCancelarAnadirTipoProveedor=findViewById(R.id.botonCancelarAnadirTipoProveedor);
-
         spinnerAnadirTipoProveedorER=findViewById(R.id.spinnerAnadirTipoProveedorER);
         loadData();
+
+        botonInsertarTipoProveedor.setVisibility(View.GONE);
+        if(savedInstanceState == null){
+            Bundle extras= getIntent().getExtras();
+            if(extras==null){
+                id= Integer.parseInt(null);
+            } else {
+                id=extras.getInt("ID");
+            }
+        } else {
+            id = (int) savedInstanceState.getSerializable("ID");
+        }
+
+        DbTipoProveedores aux=new DbTipoProveedores(EditarTipoProveedor.this);
+        tipoProveedores= aux.verTipoProveedorSeleccionado(id);
+
+        if(tipoProveedores!=null){
+            txtTipoProveedor.setText(tipoProveedores.getNombre());
+            botonInsertarTipoProveedor.setVisibility(View.VISIBLE);
+        }
 
         botonInsertarTipoProveedor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DbTipoProveedores dbTipoProveedores=new DbTipoProveedores(AnadirTipoProveedor.this);
-                EstadoRegistro test= (EstadoRegistro) spinnerAnadirTipoProveedorER.getSelectedItem();
-                long id=dbTipoProveedores.insertarTipoProveedor(txtTipoProveedor.getText().toString(),test.getCodigo());
-                if(id>0){
-                    Toast.makeText(AnadirTipoProveedor.this,"REGISTRO GUARDADO",Toast.LENGTH_LONG).show();
-                    limpiar();
+                if(!txtTipoProveedor.getText().toString().equals("")){
+                    EstadoRegistro test= (EstadoRegistro) spinnerAnadirTipoProveedorER.getSelectedItem();
+                    correcto=aux.actualizarRegistro(id,txtTipoProveedor.getText().toString(), test.getCodigo());
+
+                    if(correcto){
+                        Toast.makeText(EditarTipoProveedor.this,"REGISTRO MODIFICADO",Toast.LENGTH_LONG).show();
+                        setResult(RESULT_OK);
+                        finish();
+                    } else {
+                        Toast.makeText(EditarTipoProveedor.this,"ERRO AL MODIFICAR REGISTRO",Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    Toast.makeText(AnadirTipoProveedor.this,"ERROR AL GUARDAR REGISTRO",Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditarTipoProveedor.this,"DEBE LLENAR LOS CAMPOS",Toast.LENGTH_LONG).show();
                 }
             }
         });
+
         botonCancelarAnadirTipoProveedor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(RESULT_OK);
                 finish();
             }
         });
     }
-    private void limpiar(){
-        txtTipoProveedor.setText("");
-    }
+
     private void loadData(){
-        DbTipoProveedores dbTipoProveedores=new DbTipoProveedores(AnadirTipoProveedor.this);
+        DbTipoProveedores dbTipoProveedores=new DbTipoProveedores(EditarTipoProveedor.this);
         List<EstadoRegistro> estadoRegistrosList=dbTipoProveedores.findAllEstadoRegistro();
         if(!estadoRegistrosList.isEmpty()){
             spinnerAnadirTipoProveedorER.setAdapter(new EstadoRegistroAdapterSpinner(getApplicationContext(),R.layout.estado_registro_spinner_layout,estadoRegistrosList));

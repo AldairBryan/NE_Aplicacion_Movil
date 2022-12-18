@@ -1,4 +1,4 @@
-package com.example.ne_aplicacion_movil;
+package com.example.ne_aplicacion_movil.tablas;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,12 +19,12 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.ne_aplicacion_movil.anadir.AnadirEstadoRegistro;
+import com.example.ne_aplicacion_movil.editar.EditarEstadoRegistro;
+import com.example.ne_aplicacion_movil.R;
 import com.example.ne_aplicacion_movil.adaptadores.ListaEstadoRegistroAdapter;
-import com.example.ne_aplicacion_movil.adaptadores.ListaPaisesAdapter;
 import com.example.ne_aplicacion_movil.db.DbEstadoRegistro;
-import com.example.ne_aplicacion_movil.db.DbPaises;
 import com.example.ne_aplicacion_movil.entidades.EstadoRegistro;
-import com.example.ne_aplicacion_movil.entidades.Paises;
 import com.example.ne_aplicacion_movil.utils.SpacingItemDecoder;
 
 import java.util.ArrayList;
