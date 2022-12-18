@@ -77,25 +77,7 @@ public class TablaTipoProveedor extends AppCompatActivity {
             public void onClick(View view) {
                 if(adapter.getSelected() != null){
                     Log.d("INFO",adapter.getSelected().toString());
-
-                    AlertDialog.Builder builder= new AlertDialog.Builder(TablaTipoProveedor.this);
-                    builder.setMessage("¿Desea eliminar este Tipo Proveedor?")
-                            .setPositiveButton("SI", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    if(dbTipoProveedores.inhabilitarRegistro(adapter.getSelected().getId())){
-                                        actualizarDatos();
-                                    }
-                                }
-                            })
-                            .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                }
-                            }).show();
-
-
+                    dbTipoProveedores.inhabilitarRegistro(adapter.getSelected().getId());
                 } else {
                     Toast.makeText(TablaTipoProveedor.this, "No selection",Toast.LENGTH_LONG).show();
                 }
@@ -123,7 +105,23 @@ public class TablaTipoProveedor extends AppCompatActivity {
             public void onClick(View view) {
                 if(adapter.getSelected() != null){
                     Log.d("INFO",adapter.getSelected().toString());
-                    dbTipoProveedores.eliminarRegistro(adapter.getSelected().getId());
+
+                    AlertDialog.Builder builder= new AlertDialog.Builder(TablaTipoProveedor.this);
+                    builder.setMessage("¿Desea eliminar este Tipo Proveedor?")
+                            .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    if(dbTipoProveedores.eliminarRegistro(adapter.getSelected().getId())){
+                                        actualizarDatos();
+                                    }
+                                }
+                            })
+                            .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            }).show();
                 } else {
                     Toast.makeText(TablaTipoProveedor.this, "No selection",Toast.LENGTH_LONG).show();
                 }
