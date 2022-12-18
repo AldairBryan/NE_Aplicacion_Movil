@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.ne_aplicacion_movil.adaptadores.ListaEstadoRegistroAdapter;
 import com.example.ne_aplicacion_movil.adaptadores.ListaPaisesAdapter;
@@ -25,10 +27,23 @@ public class TablaPais extends AppCompatActivity {
 
     RecyclerView listaPaises;
     ArrayList<Paises> listaArrayPaises;
+
+    Button botonTablaPaisHabilitar,
+            botonTablaPaisInhabilitar,
+            botonTablaPaisEditar,
+            botonTablaPaisEliminar,
+            botonTablaPaisCancelar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabla_pais);
+
+        botonTablaPaisHabilitar=findViewById(R.id.botonTablaPaisHabilitar);
+        botonTablaPaisInhabilitar=findViewById(R.id.botonTablaPaisInhabilitar);
+        botonTablaPaisEditar=findViewById(R.id.botonTablaPaisEditar);
+        botonTablaPaisEliminar=findViewById(R.id.botonTablaPaisEliminar);
+        botonTablaPaisCancelar=findViewById(R.id.botonTablaPaisCancelar);
+
         listaPaises=findViewById(R.id.listaPaises);
         listaPaises.setLayoutManager(new LinearLayoutManager(this));
         SpacingItemDecoder itemDecoder= new SpacingItemDecoder(10);
@@ -37,6 +52,45 @@ public class TablaPais extends AppCompatActivity {
         listaArrayPaises=new ArrayList<Paises>();
         ListaPaisesAdapter adapter=new ListaPaisesAdapter(dbPaises.mostrarPaises());
         listaPaises.setAdapter(adapter);
+
+        botonTablaPaisHabilitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaPaisInhabilitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaPaisEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaPaisEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaPaisCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();

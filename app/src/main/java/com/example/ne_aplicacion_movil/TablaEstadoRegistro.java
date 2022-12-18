@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.ne_aplicacion_movil.adaptadores.ListaEstadoRegistroAdapter;
 import com.example.ne_aplicacion_movil.adaptadores.ListaPaisesAdapter;
@@ -25,10 +27,24 @@ import java.util.ArrayList;
 public class TablaEstadoRegistro extends AppCompatActivity {
     RecyclerView listaEstadoRegistro;
     ArrayList<EstadoRegistro> listaArrayEstadoRegistro;
+
+    Button botonTablaEstadoRegistroHabilitar,
+            botonTablaEstadoRegistroInhabilitar,
+            botonTablaEstadoRegistroEditar,
+            botonTablaEstadoRegistroEliminar,
+            botonTablaEstadoRegistroCancelar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabla_estado_registro);
+
+        botonTablaEstadoRegistroHabilitar=findViewById(R.id.botonTablaEstadoRegistroHabilitar);
+        botonTablaEstadoRegistroInhabilitar=findViewById(R.id.botonTablaEstadoRegistroInhabilitar);
+        botonTablaEstadoRegistroEditar=findViewById(R.id.botonTablaEstadoRegistroEditar);
+        botonTablaEstadoRegistroEliminar=findViewById(R.id.botonTablaEstadoRegistroEliminar);
+        botonTablaEstadoRegistroCancelar=findViewById(R.id.botonTablaEstadoRegistroCancelar);
+
         listaEstadoRegistro=findViewById(R.id.listaEstadoRegistro);
         listaEstadoRegistro.setLayoutManager(new LinearLayoutManager(this));
         SpacingItemDecoder itemDecoder= new SpacingItemDecoder(10);
@@ -37,6 +53,45 @@ public class TablaEstadoRegistro extends AppCompatActivity {
         listaArrayEstadoRegistro=new ArrayList<EstadoRegistro>();
         ListaEstadoRegistroAdapter adapter=new ListaEstadoRegistroAdapter(dbEstadoRegistro.mostrarEstadosRegistros());
         listaEstadoRegistro.setAdapter(adapter);
+
+        botonTablaEstadoRegistroHabilitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaEstadoRegistroInhabilitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaEstadoRegistroEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaEstadoRegistroEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaEstadoRegistroCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();

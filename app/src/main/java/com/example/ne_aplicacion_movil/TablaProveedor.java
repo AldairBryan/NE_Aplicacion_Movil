@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.ne_aplicacion_movil.adaptadores.ListaEstadoRegistroAdapter;
 import com.example.ne_aplicacion_movil.adaptadores.ListaPaisesAdapter;
@@ -27,10 +29,23 @@ import java.util.ArrayList;
 public class TablaProveedor extends AppCompatActivity {
     RecyclerView listaProveedor;
     ArrayList<Proveedores> listaArrayProveedor;
+    Button botonTablaProveedorHabilitar,
+            botonTablaProveedorInhabilitar,
+            botonTablaProveedorEditar,
+            botonTablaProveedorEliminar,
+            botonTablaProveedorCancelar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabla_proveedor);
+
+        botonTablaProveedorHabilitar=findViewById(R.id.botonTablaProveedorHabilitar);
+        botonTablaProveedorInhabilitar=findViewById(R.id.botonTablaProveedorInhabilitar);
+        botonTablaProveedorEditar=findViewById(R.id.botonTablaProveedorEditar);
+        botonTablaProveedorEliminar=findViewById(R.id.botonTablaProveedorEliminar);
+        botonTablaProveedorCancelar=findViewById(R.id.botonTablaProveedorCancelar);
+
         listaProveedor=findViewById(R.id.listaProveedores);
         listaProveedor.setLayoutManager(new LinearLayoutManager(this));
         SpacingItemDecoder itemDecoder= new SpacingItemDecoder(10);
@@ -39,6 +54,45 @@ public class TablaProveedor extends AppCompatActivity {
         listaArrayProveedor=new ArrayList<Proveedores>();
         ListaProveedoresAdapter adapter=new ListaProveedoresAdapter(dbProveedores.mostrarProveedores());
         listaProveedor.setAdapter(adapter);
+
+        botonTablaProveedorHabilitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaProveedorInhabilitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaProveedorEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaProveedorEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaProveedorCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();

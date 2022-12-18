@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.ne_aplicacion_movil.adaptadores.ListaEstadoRegistroAdapter;
 import com.example.ne_aplicacion_movil.adaptadores.ListaPaisesAdapter;
@@ -27,10 +29,22 @@ import java.util.ArrayList;
 public class TablaTipoProveedor extends AppCompatActivity {
     RecyclerView listaTipoProveedor;
     ArrayList<TipoProveedores> listaArrayTipoProveedor;
+    Button botonTablaTipoProveedorHabilitar,
+            botonTablaTipoProveedorInhabilitar,
+            botonTablaTipoProveedorEditar,
+            botonTablaTipoProveedorEliminar,
+            botonTablaTipoProveedorCancelar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabla_tipo_proveedor);
+
+        botonTablaTipoProveedorHabilitar=findViewById(R.id.botonTablaTipoProveedorHabilitar);
+        botonTablaTipoProveedorInhabilitar=findViewById(R.id.botonTablaTipoProveedorInhabilitar);
+        botonTablaTipoProveedorEditar=findViewById(R.id.botonTablaTipoProveedorEditar);
+        botonTablaTipoProveedorEliminar=findViewById(R.id.botonTablaTipoProveedorEliminar);
+        botonTablaTipoProveedorCancelar=findViewById(R.id.botonTablaTipoProveedorCancelar);
+
         listaTipoProveedor=findViewById(R.id.listaTipoProveedores);
         listaTipoProveedor.setLayoutManager(new LinearLayoutManager(this));
         SpacingItemDecoder itemDecoder= new SpacingItemDecoder(10);
@@ -39,6 +53,45 @@ public class TablaTipoProveedor extends AppCompatActivity {
         listaArrayTipoProveedor=new ArrayList<TipoProveedores>();
         ListaTipoProveedorAdapter adapter=new ListaTipoProveedorAdapter(dbTipoProveedores.mostrarTiposProveedores());
         listaTipoProveedor.setAdapter(adapter);
+
+        botonTablaTipoProveedorHabilitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaTipoProveedorInhabilitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaTipoProveedorEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaTipoProveedorEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                actualizarDatos();
+            }
+        });
+
+        botonTablaTipoProveedorCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
