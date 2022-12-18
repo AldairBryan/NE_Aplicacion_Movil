@@ -13,6 +13,27 @@
         android:theme="@style/Theme.NE_Aplicacion_Movil"
         tools:targetApi="31">
         <activity
+            android:name=".EditarTipoProveedor"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".EditarProveedor"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".EditarEstadoRegistro"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".EditarPais"
             android:exported="false">
             <meta-data
