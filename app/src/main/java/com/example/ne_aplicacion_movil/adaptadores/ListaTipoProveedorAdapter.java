@@ -31,9 +31,9 @@ public class ListaTipoProveedorAdapter extends RecyclerView.Adapter<ListaTipoPro
 
     @Override
     public void onBindViewHolder(@NonNull TipoProveedorViewHolder holder, int position) {
-        holder.viewIdTipoProveedor.setText(listaTipoProveedores.get(position).getId()+"");
-        holder.viewNombreTipoProveedor.setText(listaTipoProveedores.get(position).getNombre());
-        holder.viewEstadoRegistroTipoProveedor.setText(listaTipoProveedores.get(position).getEstadoRegistro()+"");
+        holder.viewIdTipoProveedor.setText("ID: "+listaTipoProveedores.get(position).getId()+"");
+        holder.viewNombreTipoProveedor.setText("Tipo Prov: " +listaTipoProveedores.get(position).getNombre());
+        holder.viewEstadoRegistroTipoProveedor.setText("Estado R: "+listaTipoProveedores.get(position).getEstadoRegistro()+"");
         if(checkedPosition == -1){
             holder.imageCheck.setVisibility(View.GONE);
         } else {

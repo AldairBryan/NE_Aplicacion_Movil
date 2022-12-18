@@ -32,7 +32,7 @@ public class ListaEstadoRegistroAdapter extends RecyclerView.Adapter<ListaEstado
 
     @Override
     public void onBindViewHolder(@NonNull EstadoRegistroViewHolder holder, int position) {
-        holder.viewCodigoEstadoRegistro.setText(listaEstadoRegistro.get(position).getCodigo());
+        holder.viewCodigoEstadoRegistro.setText("Codigo: "+listaEstadoRegistro.get(position).getCodigo());
         if(checkedPosition == -1){
             holder.imageCheck.setVisibility(View.GONE);
         } else {

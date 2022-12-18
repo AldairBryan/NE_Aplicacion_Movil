@@ -33,12 +33,12 @@ public class ListaProveedoresAdapter extends RecyclerView.Adapter<ListaProveedor
 
     @Override
     public void onBindViewHolder(@NonNull ProveedoresViewHolder holder, int position) {
-        holder.viewIdProveedor.setText(listaProveedores.get(position).getId()+"");
-        holder.viewNombreProveedor.setText(listaProveedores.get(position).getNombre());
-        holder.viewRUCProveedor.setText(listaProveedores.get(position).getRUC()+"");
-        holder.viewFKTPProveedor.setText(listaProveedores.get(position).getTipoProveedor()+"");
-        holder.viewFKPaisProveedor.setText(listaProveedores.get(position).getPais()+"");
-        holder.viewERProveedor.setText(listaProveedores.get(position).getEstadoRegistro()+"");
+        holder.viewIdProveedor.setText("ID: "+listaProveedores.get(position).getId()+"");
+        holder.viewNombreProveedor.setText("Proveedor: "+listaProveedores.get(position).getNombre());
+        holder.viewRUCProveedor.setText("RUC: "+listaProveedores.get(position).getRUC()+"");
+        holder.viewFKTPProveedor.setText("Tipo Prov: "+listaProveedores.get(position).getTipoProveedor()+"");
+        holder.viewFKPaisProveedor.setText("Pais: "+listaProveedores.get(position).getPais()+"");
+        holder.viewERProveedor.setText("Estado R: "+listaProveedores.get(position).getEstadoRegistro()+"");
         if(checkedPosition == -1){
             holder.imageCheck.setVisibility(View.GONE);
         } else {

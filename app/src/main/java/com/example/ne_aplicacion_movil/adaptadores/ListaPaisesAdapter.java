@@ -31,9 +31,9 @@ public class ListaPaisesAdapter extends RecyclerView.Adapter<ListaPaisesAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull PaisViewHolder holder, int position) {
-        holder.viewIdPais.setText(listaPaises.get(position).getId()+"");
-        holder.viewNombrePais.setText(listaPaises.get(position).getNombre());
-        holder.viewEstadoRegistroPais.setText(listaPaises.get(position).getEstadoRegistro()+"");
+        holder.viewIdPais.setText("ID: "+listaPaises.get(position).getId()+"");
+        holder.viewNombrePais.setText("Pais: "+listaPaises.get(position).getNombre());
+        holder.viewEstadoRegistroPais.setText("Estado R: "+listaPaises.get(position).getEstadoRegistro()+"");
 
         if(checkedPosition == -1){
             holder.imageCheck.setVisibility(View.GONE);
