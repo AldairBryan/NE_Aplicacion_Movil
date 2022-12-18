@@ -125,4 +125,22 @@ public class DbTipoProveedores extends DbHelper{
         }
         return  correcto;
     }
+
+    public TipoProveedores verTipoProveedorSeleccionado(int id){
+        DbHelper dbHelper= new DbHelper(context);
+        SQLiteDatabase db=dbHelper.getWritableDatabase();
+
+        TipoProveedores tipoProveedores=null;
+        Cursor cursorTipoProveedor=null;
+
+        cursorTipoProveedor = db.rawQuery("SELECT * FROM "+TABLE_TIPO_PROVEEDORES+" WHERE idtipo_proveedor='"+id+"'",null);
+        if (cursorTipoProveedor.moveToFirst()){
+            tipoProveedores=new TipoProveedores();
+            tipoProveedores.setId(cursorTipoProveedor.getInt(0));
+            tipoProveedores.setNombre(cursorTipoProveedor.getString(1));
+            tipoProveedores.setEstadoRegistro(cursorTipoProveedor.getString(2));
+        }
+        cursorTipoProveedor.close();
+        return  tipoProveedores;
+    }
 }

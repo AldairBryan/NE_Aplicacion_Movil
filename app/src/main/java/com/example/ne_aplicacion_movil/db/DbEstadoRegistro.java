@@ -71,4 +71,20 @@ public class DbEstadoRegistro extends  DbHelper{
         }
         return  correcto;
     }
+
+    public EstadoRegistro verEstadoRegistroSeleccionado(String codigo){
+        DbHelper dbHelper= new DbHelper(context);
+        SQLiteDatabase db=dbHelper.getWritableDatabase();
+
+        EstadoRegistro estadoRegistro=null;
+        Cursor cursorEstadoRegistro=null;
+
+        cursorEstadoRegistro = db.rawQuery("SELECT * FROM "+TABLE_ESTADO_REGISTRO+" WHERE codigo='"+codigo+"'",null);
+        if (cursorEstadoRegistro.moveToFirst()){
+            estadoRegistro=new EstadoRegistro();
+            estadoRegistro.setCodigo(cursorEstadoRegistro.getString(0));
+        }
+        cursorEstadoRegistro.close();
+        return  estadoRegistro;
+    }
 }

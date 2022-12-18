@@ -179,4 +179,25 @@ public class DbProveedores extends DbHelper {
         }
         return  correcto;
     }
+
+    public Proveedores verProveedorSeleccionado(int id){
+        DbHelper dbHelper= new DbHelper(context);
+        SQLiteDatabase db=dbHelper.getWritableDatabase();
+
+        Proveedores proveedores=null;
+        Cursor cursorProveedores=null;
+
+        cursorProveedores = db.rawQuery("SELECT * FROM "+TABLE_PROVEEDORES+" WHERE idproveedor='"+id+"'",null);
+        if (cursorProveedores.moveToFirst()){
+            proveedores=new Proveedores();
+            proveedores.setId(cursorProveedores.getInt(0));
+            proveedores.setNombre(cursorProveedores.getString(1));
+            proveedores.setRUC(cursorProveedores.getInt(2));
+            proveedores.setTipoProveedor(cursorProveedores.getString(3));
+            proveedores.setPais(cursorProveedores.getString(4));
+            proveedores.setEstadoRegistro(cursorProveedores.getString(5));
+        }
+        cursorProveedores.close();
+        return  proveedores;
+    }
 }
