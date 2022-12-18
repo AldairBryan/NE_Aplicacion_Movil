@@ -104,12 +104,12 @@ public class EditarProveedor extends AppCompatActivity {
 
         List<TipoProveedores> tipoProveedoresList=dbProveedores.findAllTipoProveedores();
         if(!tipoProveedoresList.isEmpty()){
-            spinnerAnadirProveedorTipoP.setAdapter(new TipoProveedorAdapterSpinner(getApplicationContext(),R.layout.estado_registro_spinner_layout,tipoProveedoresList));
+            spinnerAnadirProveedorTipoP.setAdapter(new TipoProveedorAdapterSpinner(getApplicationContext(),R.layout.informacion_spinner_layout,tipoProveedoresList));
         }
 
         List<Paises> paisesList= dbProveedores.findAllPaises();
         if(!paisesList.isEmpty()){
-            spinnerAnadirProveedorPais.setAdapter(new PaisAdapterSpinner(getApplicationContext(),R.layout.estado_registro_spinner_layout,paisesList));
+            spinnerAnadirProveedorPais.setAdapter(new PaisAdapterSpinner(getApplicationContext(),R.layout.informacion_spinner_layout,paisesList));
         }
 
         List<EstadoRegistro> estadoRegistrosList=dbProveedores.findAllEstadoRegistro();
