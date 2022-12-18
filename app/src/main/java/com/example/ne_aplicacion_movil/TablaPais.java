@@ -34,9 +34,6 @@ public class TablaPais extends AppCompatActivity {
             botonTablaPaisEliminar,
             botonTablaPaisCancelar;
 
-    DbPaises dbPaises;
-    ListaPaisesAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,13 +50,9 @@ public class TablaPais extends AppCompatActivity {
         SpacingItemDecoder itemDecoder= new SpacingItemDecoder(10);
         listaPaises.addItemDecoration(itemDecoder);
 
-        //DbPaises dbPaises=new DbPaises(TablaPais.this);
-        dbPaises=new DbPaises(TablaPais.this);
-
+        DbPaises dbPaises=new DbPaises(TablaPais.this);
         listaArrayPaises=new ArrayList<Paises>();
-
-        //ListaPaisesAdapter adapter=new ListaPaisesAdapter(dbPaises.mostrarPaises());
-        adapter=new ListaPaisesAdapter(dbPaises.mostrarPaises());
+        ListaPaisesAdapter adapter=new ListaPaisesAdapter(dbPaises.mostrarPaises());
 
         listaPaises.setAdapter(adapter);
 
