@@ -61,11 +61,10 @@ public class TablaEstadoRegistro extends AppCompatActivity {
                     Context context= view.getContext();
                     Intent intent=new Intent(context, EditarEstadoRegistro.class);
                     intent.putExtra("ID",adapter.getSelected().getCodigo());
-                    context.startActivity(intent);
+                    startActivityForResult(intent,0);
                 } else {
                     Toast.makeText(TablaEstadoRegistro.this, "No selection",Toast.LENGTH_LONG).show();
                 }
-                actualizarDatos();
             }
         });
 

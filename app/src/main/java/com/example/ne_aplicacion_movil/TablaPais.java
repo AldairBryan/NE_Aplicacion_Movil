@@ -93,11 +93,10 @@ public class TablaPais extends AppCompatActivity {
                     Context context= view.getContext();
                     Intent intent=new Intent(context, EditarPais.class);
                     intent.putExtra("ID",adapter.getSelected().getId());
-                    context.startActivity(intent);
+                    startActivityForResult(intent,0);
                 } else {
                     Toast.makeText(TablaPais.this, "No selection",Toast.LENGTH_LONG).show();
                 }
-                actualizarDatos();
             }
         });
 

@@ -67,6 +67,7 @@ public class EditarPais extends AppCompatActivity {
 
                     if(correcto){
                         Toast.makeText(EditarPais.this,"REGISTRO MODIFICADO",Toast.LENGTH_LONG).show();
+                        setResult(RESULT_OK);
                         finish();
                     } else {
                         Toast.makeText(EditarPais.this,"ERRO AL MODIFICAR REGISTRO",Toast.LENGTH_LONG).show();
