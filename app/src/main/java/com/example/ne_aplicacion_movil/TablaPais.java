@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.ne_aplicacion_movil.adaptadores.ListaEstadoRegistroAdapter;
@@ -28,7 +29,7 @@ import com.example.ne_aplicacion_movil.utils.SpacingItemDecoder;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 
-public class TablaPais extends AppCompatActivity {
+public class TablaPais extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     RecyclerView listaPaises;
     ArrayList<Paises> listaArrayPaises;
@@ -38,11 +39,15 @@ public class TablaPais extends AppCompatActivity {
             botonTablaPaisEliminar,
             botonTablaPaisCancelar;
 
+    SearchView txtBuscarPais;
+    ListaPaisesAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabla_pais);
 
+        txtBuscarPais=findViewById(R.id.txtBuscarPais);
         botonTablaPaisHabilitar=findViewById(R.id.botonTablaPaisHabilitar);
         botonTablaPaisInhabilitar=findViewById(R.id.botonTablaPaisInhabilitar);
         botonTablaPaisEditar=findViewById(R.id.botonTablaPaisEditar);
@@ -56,7 +61,7 @@ public class TablaPais extends AppCompatActivity {
 
         DbPaises dbPaises=new DbPaises(TablaPais.this);
         listaArrayPaises=new ArrayList<Paises>();
-        ListaPaisesAdapter adapter=new ListaPaisesAdapter(dbPaises.mostrarPaises());
+        adapter=new ListaPaisesAdapter(dbPaises.mostrarPaises());
 
         listaPaises.setAdapter(adapter);
 
@@ -138,6 +143,8 @@ public class TablaPais extends AppCompatActivity {
                 finish();
             }
         });
+        txtBuscarPais.setOnQueryTextListener(this);
+
     }
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -175,4 +182,14 @@ public class TablaPais extends AppCompatActivity {
         listaPaises.setAdapter(adapter);
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        adapter.filtrado(s);
+        return false;
+    }
 }

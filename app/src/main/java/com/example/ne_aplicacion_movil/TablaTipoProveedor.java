@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.ne_aplicacion_movil.adaptadores.ListaEstadoRegistroAdapter;
@@ -30,7 +31,7 @@ import com.example.ne_aplicacion_movil.utils.SpacingItemDecoder;
 
 import java.util.ArrayList;
 
-public class TablaTipoProveedor extends AppCompatActivity {
+public class TablaTipoProveedor extends AppCompatActivity implements SearchView.OnQueryTextListener{
     RecyclerView listaTipoProveedor;
     ArrayList<TipoProveedores> listaArrayTipoProveedor;
     Button botonTablaTipoProveedorHabilitar,
@@ -38,11 +39,16 @@ public class TablaTipoProveedor extends AppCompatActivity {
             botonTablaTipoProveedorEditar,
             botonTablaTipoProveedorEliminar,
             botonTablaTipoProveedorCancelar;
+
+    SearchView txtBuscarTipoProveedor;
+    ListaTipoProveedorAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabla_tipo_proveedor);
 
+        txtBuscarTipoProveedor=findViewById(R.id.txtBuscarTipoProveedor);
         botonTablaTipoProveedorHabilitar=findViewById(R.id.botonTablaTipoProveedorHabilitar);
         botonTablaTipoProveedorInhabilitar=findViewById(R.id.botonTablaTipoProveedorInhabilitar);
         botonTablaTipoProveedorEditar=findViewById(R.id.botonTablaTipoProveedorEditar);
@@ -55,7 +61,7 @@ public class TablaTipoProveedor extends AppCompatActivity {
         listaTipoProveedor.addItemDecoration(itemDecoder);
         DbTipoProveedores dbTipoProveedores=new DbTipoProveedores(TablaTipoProveedor.this);
         listaArrayTipoProveedor=new ArrayList<TipoProveedores>();
-        ListaTipoProveedorAdapter adapter=new ListaTipoProveedorAdapter(dbTipoProveedores.mostrarTiposProveedores());
+        adapter=new ListaTipoProveedorAdapter(dbTipoProveedores.mostrarTiposProveedores());
         listaTipoProveedor.setAdapter(adapter);
 
         botonTablaTipoProveedorHabilitar.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +141,8 @@ public class TablaTipoProveedor extends AppCompatActivity {
                 finish();
             }
         });
+        txtBuscarTipoProveedor.setOnQueryTextListener(this);
+
     }
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -170,5 +178,16 @@ public class TablaTipoProveedor extends AppCompatActivity {
         DbTipoProveedores dbTipoProveedores=new DbTipoProveedores(TablaTipoProveedor.this);
         ListaTipoProveedorAdapter adapter=new ListaTipoProveedorAdapter(dbTipoProveedores.mostrarTiposProveedores());
         listaTipoProveedor.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        adapter.filtrado(s);
+        return false;
     }
 }

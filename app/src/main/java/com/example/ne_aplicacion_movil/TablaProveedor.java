@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.ne_aplicacion_movil.adaptadores.ListaEstadoRegistroAdapter;
@@ -30,7 +31,7 @@ import com.example.ne_aplicacion_movil.utils.SpacingItemDecoder;
 
 import java.util.ArrayList;
 
-public class TablaProveedor extends AppCompatActivity {
+public class TablaProveedor extends AppCompatActivity implements SearchView.OnQueryTextListener{
     RecyclerView listaProveedor;
     ArrayList<Proveedores> listaArrayProveedor;
     Button botonTablaProveedorHabilitar,
@@ -39,11 +40,15 @@ public class TablaProveedor extends AppCompatActivity {
             botonTablaProveedorEliminar,
             botonTablaProveedorCancelar;
 
+    SearchView txtBuscarProveedor;
+    ListaProveedoresAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabla_proveedor);
 
+        txtBuscarProveedor=findViewById(R.id.txtBuscarProveedor);
         botonTablaProveedorHabilitar=findViewById(R.id.botonTablaProveedorHabilitar);
         botonTablaProveedorInhabilitar=findViewById(R.id.botonTablaProveedorInhabilitar);
         botonTablaProveedorEditar=findViewById(R.id.botonTablaProveedorEditar);
@@ -56,7 +61,7 @@ public class TablaProveedor extends AppCompatActivity {
         listaProveedor.addItemDecoration(itemDecoder);
         DbProveedores dbProveedores=new DbProveedores(TablaProveedor.this);
         listaArrayProveedor=new ArrayList<Proveedores>();
-        ListaProveedoresAdapter adapter=new ListaProveedoresAdapter(dbProveedores.mostrarProveedores());
+        adapter=new ListaProveedoresAdapter(dbProveedores.mostrarProveedores());
         listaProveedor.setAdapter(adapter);
 
         botonTablaProveedorHabilitar.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +143,8 @@ public class TablaProveedor extends AppCompatActivity {
                 finish();
             }
         });
+        txtBuscarProveedor.setOnQueryTextListener(this);
+
     }
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -173,5 +180,16 @@ public class TablaProveedor extends AppCompatActivity {
         DbProveedores dbProveedores=new DbProveedores(TablaProveedor.this);
         ListaProveedoresAdapter adapter=new ListaProveedoresAdapter(dbProveedores.mostrarProveedores());
         listaProveedor.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        adapter.filtrado(s);
+        return false;
     }
 }
