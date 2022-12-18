@@ -124,4 +124,22 @@ public class DbPaises extends DbHelper{
         }
         return  correcto;
     }
+
+    public Paises verPaisSeleccionado(int id){
+        DbHelper dbHelper= new DbHelper(context);
+        SQLiteDatabase db=dbHelper.getWritableDatabase();
+
+        Paises pais=null;
+        Cursor cursorPaises=null;
+
+        cursorPaises = db.rawQuery("SELECT * FROM "+TABLE_PAISES+" WHERE idpais='"+id+"'",null);
+        if (cursorPaises.moveToFirst()){
+            pais=new Paises();
+            pais.setId(cursorPaises.getInt(0));
+            pais.setNombre(cursorPaises.getString(1));
+            pais.setEstadoRegistro(cursorPaises.getString(2));
+        }
+        cursorPaises.close();
+        return  pais;
+    }
 }

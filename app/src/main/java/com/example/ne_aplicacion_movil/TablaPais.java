@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.example.ne_aplicacion_movil.db.DbPaises;
 import com.example.ne_aplicacion_movil.entidades.Paises;
 import com.example.ne_aplicacion_movil.utils.SpacingItemDecoder;
 
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 
 public class TablaPais extends AppCompatActivity {
@@ -86,6 +88,15 @@ public class TablaPais extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if(adapter.getSelected() != null){
+                    Log.d("INFO",adapter.getSelected().toString());
+                    Context context= view.getContext();
+                    Intent intent=new Intent(context, EditarPais.class);
+                    intent.putExtra("ID",adapter.getSelected().getId());
+                    context.startActivity(intent);
+                } else {
+                    Toast.makeText(TablaPais.this, "No selection",Toast.LENGTH_LONG).show();
+                }
                 actualizarDatos();
             }
         });
