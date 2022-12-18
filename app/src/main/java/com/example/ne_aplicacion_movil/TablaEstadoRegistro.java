@@ -73,23 +73,27 @@ public class TablaEstadoRegistro extends AppCompatActivity {
         botonTablaEstadoRegistroEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder= new AlertDialog.Builder(TablaEstadoRegistro.this);
-                builder.setMessage("¿Desea eliminar este Estado de Registro?")
-                        .setPositiveButton("SI", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                if(dbEstadoRegistro.eliminarRegistro(adapter.getSelected().getCodigo())){
-                                    actualizarDatos();
+                if(adapter.getSelected() != null){
+                    AlertDialog.Builder builder= new AlertDialog.Builder(TablaEstadoRegistro.this);
+                    builder.setMessage("¿Desea eliminar este Estado de Registro?")
+                            .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    if(dbEstadoRegistro.eliminarRegistro(adapter.getSelected().getCodigo())){
+                                        actualizarDatos();
+                                    }
                                 }
-                            }
-                        })
-                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                            })
+                            .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
-                            }
-                        }).show();
-
+                                }
+                            }).show();
+                } else {
+                    Toast.makeText(TablaEstadoRegistro.this, "No selection",Toast.LENGTH_LONG).show();
+                }
+                actualizarDatos();
             }
         });
 
