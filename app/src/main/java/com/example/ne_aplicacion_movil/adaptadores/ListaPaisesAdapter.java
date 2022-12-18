@@ -73,4 +73,11 @@ public class ListaPaisesAdapter extends RecyclerView.Adapter<ListaPaisesAdapter.
             imageCheck=itemView.findViewById(R.id.listaItemPaisCheck);
         }
     }
+
+    public Paises getSelected(){
+        if(checkedPosition != -1){
+            return listaPaises.get(checkedPosition);
+        }
+        return null;
+    }
 }

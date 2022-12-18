@@ -58,6 +58,7 @@ public class TablaTipoProveedor extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
                 actualizarDatos();
             }
         });

@@ -127,4 +127,5 @@ public class TablaPais extends AppCompatActivity {
         ListaPaisesAdapter adapter=new ListaPaisesAdapter(dbPaises.mostrarPaises());
         listaPaises.setAdapter(adapter);
     }
+
 }

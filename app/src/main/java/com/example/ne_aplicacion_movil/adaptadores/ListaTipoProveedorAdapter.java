@@ -73,4 +73,10 @@ public class ListaTipoProveedorAdapter extends RecyclerView.Adapter<ListaTipoPro
 
         }
     }
+    public TipoProveedores getSelected(){
+        if(checkedPosition != -1){
+            return listaTipoProveedores.get(checkedPosition);
+        }
+        return null;
+    }
 }

@@ -81,4 +81,11 @@ public class ListaProveedoresAdapter extends RecyclerView.Adapter<ListaProveedor
 
         }
     }
+
+    public Proveedores getSelected(){
+        if(checkedPosition != -1){
+            return listaProveedores.get(checkedPosition);
+        }
+        return null;
+    }
 }

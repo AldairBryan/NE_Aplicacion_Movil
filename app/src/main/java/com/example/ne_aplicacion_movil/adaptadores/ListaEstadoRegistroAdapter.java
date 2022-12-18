@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ne_aplicacion_movil.R;
 import com.example.ne_aplicacion_movil.entidades.EstadoRegistro;
+import com.example.ne_aplicacion_movil.entidades.Paises;
 
 import java.util.ArrayList;
 
@@ -69,4 +70,12 @@ public class ListaEstadoRegistroAdapter extends RecyclerView.Adapter<ListaEstado
 
         }
     }
+
+    public EstadoRegistro getSelected(){
+        if(checkedPosition != -1){
+            return listaEstadoRegistro.get(checkedPosition);
+        }
+        return null;
+    }
+
 }
