@@ -14,13 +14,19 @@ import com.example.ne_aplicacion_movil.entidades.EstadoRegistro;
 import com.example.ne_aplicacion_movil.entidades.Paises;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListaEstadoRegistroAdapter extends RecyclerView.Adapter<ListaEstadoRegistroAdapter.EstadoRegistroViewHolder> {
 
     ArrayList<EstadoRegistro> listaEstadoRegistro;
+    ArrayList<EstadoRegistro> listaEstadoRegistroOriginal;
+
     private static int checkedPosition=-1;
     public ListaEstadoRegistroAdapter(ArrayList<EstadoRegistro> listaEstadoRegistro){
         this.listaEstadoRegistro= listaEstadoRegistro;
+        listaEstadoRegistroOriginal= new ArrayList<EstadoRegistro>();
+        listaEstadoRegistroOriginal.addAll(listaEstadoRegistro);
     }
 
     @NonNull
@@ -78,4 +84,26 @@ public class ListaEstadoRegistroAdapter extends RecyclerView.Adapter<ListaEstado
         return null;
     }
 
+    public void filtrado(String txtBuscar){
+        int longitud=txtBuscar.length();
+        if(longitud==0){
+            listaEstadoRegistro.clear();
+            listaEstadoRegistro.addAll(listaEstadoRegistroOriginal);
+        } else {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                List<EstadoRegistro> collection=listaEstadoRegistro.stream()
+                        .filter( i -> i.getCodigo().toLowerCase().contains(txtBuscar.toLowerCase()))
+                        .collect(Collectors.toList());
+                listaEstadoRegistro.clear();
+                listaEstadoRegistro.addAll(collection);
+            } else {
+                for (EstadoRegistro e:listaEstadoRegistroOriginal){
+                    if(e.getCodigo().toLowerCase().contains(txtBuscar.toLowerCase())){
+                        listaEstadoRegistro.add(e);
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
 }

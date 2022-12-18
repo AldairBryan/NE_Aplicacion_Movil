@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.ne_aplicacion_movil.adaptadores.ListaEstadoRegistroAdapter;
@@ -28,7 +29,7 @@ import com.example.ne_aplicacion_movil.utils.SpacingItemDecoder;
 
 import java.util.ArrayList;
 
-public class TablaEstadoRegistro extends AppCompatActivity {
+public class TablaEstadoRegistro extends AppCompatActivity implements SearchView.OnQueryTextListener{
     RecyclerView listaEstadoRegistro;
     ArrayList<EstadoRegistro> listaArrayEstadoRegistro;
 
@@ -36,11 +37,15 @@ public class TablaEstadoRegistro extends AppCompatActivity {
             botonTablaEstadoRegistroEliminar,
             botonTablaEstadoRegistroCancelar;
 
+    SearchView txtBuscarEstadoRegistro;
+    ListaEstadoRegistroAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabla_estado_registro);
 
+        txtBuscarEstadoRegistro=findViewById(R.id.txtBuscarEstadoRegistro);
         botonTablaEstadoRegistroEditar=findViewById(R.id.botonTablaEstadoRegistroEditar);
         botonTablaEstadoRegistroEliminar=findViewById(R.id.botonTablaEstadoRegistroEliminar);
         botonTablaEstadoRegistroCancelar=findViewById(R.id.botonTablaEstadoRegistroCancelar);
@@ -51,7 +56,7 @@ public class TablaEstadoRegistro extends AppCompatActivity {
         listaEstadoRegistro.addItemDecoration(itemDecoder);
         DbEstadoRegistro dbEstadoRegistro=new DbEstadoRegistro(TablaEstadoRegistro.this);
         listaArrayEstadoRegistro=new ArrayList<EstadoRegistro>();
-        ListaEstadoRegistroAdapter adapter=new ListaEstadoRegistroAdapter(dbEstadoRegistro.mostrarEstadosRegistros());
+        adapter=new ListaEstadoRegistroAdapter(dbEstadoRegistro.mostrarEstadosRegistros());
         listaEstadoRegistro.setAdapter(adapter);
 
 
@@ -103,6 +108,8 @@ public class TablaEstadoRegistro extends AppCompatActivity {
                 finish();
             }
         });
+
+        txtBuscarEstadoRegistro.setOnQueryTextListener(this);
     }
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -138,5 +145,16 @@ public class TablaEstadoRegistro extends AppCompatActivity {
         DbEstadoRegistro dbEstadoRegistro=new DbEstadoRegistro(TablaEstadoRegistro.this);
         ListaEstadoRegistroAdapter adapter=new ListaEstadoRegistroAdapter(dbEstadoRegistro.mostrarEstadosRegistros());
         listaEstadoRegistro.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        adapter.filtrado(s);
+        return false;
     }
 }
