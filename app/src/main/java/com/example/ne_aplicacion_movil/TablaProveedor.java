@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -104,7 +106,25 @@ public class TablaProveedor extends AppCompatActivity {
             public void onClick(View view) {
                 if(adapter.getSelected() != null){
                     Log.d("INFO",adapter.getSelected().toString());
-                    dbProveedores.eliminarRegistro(adapter.getSelected().getId());
+
+                    AlertDialog.Builder builder= new AlertDialog.Builder(TablaProveedor.this);
+                    builder.setMessage("¿Desea eliminar este Proveedor?")
+                            .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    if( dbProveedores.eliminarRegistro(adapter.getSelected().getId())){
+                                        actualizarDatos();
+                                    }
+                                }
+                            })
+                            .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            }).show();
+
+
                 } else {
                     Toast.makeText(TablaProveedor.this, "No selection",Toast.LENGTH_LONG).show();
                 }
