@@ -161,4 +161,22 @@ public class DbProveedores extends DbHelper {
     public boolean eliminarRegistro(int id){
         return actualizarEstadoRegistro(id,"*");
     }
+
+    public boolean actualizarRegistro(int id,String nombre,int RUC,int tipoProveedor,int pais,String estadoRegistro){
+        boolean correcto=false;
+        DbHelper dbHelper= new DbHelper(context);
+        SQLiteDatabase db=dbHelper.getWritableDatabase();
+        try {
+            db.execSQL("UPDATE "+TABLE_PROVEEDORES+" SET nombre='"+nombre+"' , RUC ='"+RUC+"'," +
+                    "tipo_proveedor='"+tipoProveedor+"',pais='"+pais+"', estado_registro='"+estadoRegistro+"' " +
+                    "WHERE idproveedor='"+id+"'");
+            correcto=true;
+        } catch(Exception e){
+            e.toString();
+            correcto=false;
+        } finally {
+            db.close();
+        }
+        return  correcto;
+    }
 }

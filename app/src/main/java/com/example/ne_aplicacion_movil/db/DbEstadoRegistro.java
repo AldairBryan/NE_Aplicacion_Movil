@@ -55,5 +55,20 @@ public class DbEstadoRegistro extends  DbHelper{
         return  listaEstadosRegistros;
     }
 
-
+    public boolean actualizarRegistro(String codigo){
+        boolean correcto=false;
+        DbHelper dbHelper= new DbHelper(context);
+        SQLiteDatabase db=dbHelper.getWritableDatabase();
+        try {
+            db.execSQL("UPDATE "+TABLE_ESTADO_REGISTRO+" SET codigo='"+codigo+"' " +
+                    "WHERE codigo='"+codigo+"'");
+            correcto=true;
+        } catch(Exception e){
+            e.toString();
+            correcto=false;
+        } finally {
+            db.close();
+        }
+        return  correcto;
+    }
 }
