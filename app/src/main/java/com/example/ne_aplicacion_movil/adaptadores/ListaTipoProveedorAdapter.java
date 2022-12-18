@@ -10,16 +10,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ne_aplicacion_movil.R;
+import com.example.ne_aplicacion_movil.entidades.EstadoRegistro;
 import com.example.ne_aplicacion_movil.entidades.Paises;
 import com.example.ne_aplicacion_movil.entidades.TipoProveedores;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListaTipoProveedorAdapter extends RecyclerView.Adapter<ListaTipoProveedorAdapter.TipoProveedorViewHolder> {
     ArrayList<TipoProveedores> listaTipoProveedores;
+    ArrayList<TipoProveedores> listaTipoProveedoresOriginal;
+
     private static int checkedPosition=-1;
     public ListaTipoProveedorAdapter(ArrayList<TipoProveedores> listaTipoProveedores){
         this.listaTipoProveedores= listaTipoProveedores;
+        listaTipoProveedoresOriginal= new ArrayList<TipoProveedores>();
+        listaTipoProveedoresOriginal.addAll(listaTipoProveedores);
     }
 
     @NonNull
@@ -78,5 +85,28 @@ public class ListaTipoProveedorAdapter extends RecyclerView.Adapter<ListaTipoPro
             return listaTipoProveedores.get(checkedPosition);
         }
         return null;
+    }
+
+    public void filtrado(String txtBuscar){
+        int longitud=txtBuscar.length();
+        if(longitud==0){
+            listaTipoProveedores.clear();
+            listaTipoProveedores.addAll(listaTipoProveedoresOriginal);
+        } else {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                List<TipoProveedores> collection=listaTipoProveedores.stream()
+                        .filter( i -> i.getNombre().toLowerCase().contains(txtBuscar.toLowerCase()))
+                        .collect(Collectors.toList());
+                listaTipoProveedores.clear();
+                listaTipoProveedores.addAll(collection);
+            } else {
+                for (TipoProveedores e:listaTipoProveedoresOriginal){
+                    if(e.getNombre().toLowerCase().contains(txtBuscar.toLowerCase())){
+                        listaTipoProveedores.add(e);
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

@@ -10,19 +10,26 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ne_aplicacion_movil.R;
+import com.example.ne_aplicacion_movil.entidades.EstadoRegistro;
 import com.example.ne_aplicacion_movil.entidades.Paises;
 import com.example.ne_aplicacion_movil.entidades.Proveedores;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListaProveedoresAdapter extends RecyclerView.Adapter<ListaProveedoresAdapter.ProveedoresViewHolder> {
 
     ArrayList<Proveedores> listaProveedores;
+    ArrayList<Proveedores> listaProveedoresOriginal;
+
     private static int checkedPosition=-1;
     public ListaProveedoresAdapter(ArrayList<Proveedores> listaProveedores){
         this.listaProveedores= listaProveedores;
+        listaProveedoresOriginal= new ArrayList<Proveedores>();
+        listaProveedoresOriginal.addAll(listaProveedores);
     }
     @NonNull
     @Override
@@ -89,5 +96,28 @@ public class ListaProveedoresAdapter extends RecyclerView.Adapter<ListaProveedor
             return listaProveedores.get(checkedPosition);
         }
         return null;
+    }
+
+    public void filtrado(String txtBuscar){
+        int longitud=txtBuscar.length();
+        if(longitud==0){
+            listaProveedores.clear();
+            listaProveedores.addAll(listaProveedoresOriginal);
+        } else {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                List<Proveedores> collection=listaProveedores.stream()
+                        .filter( i -> i.getNombre().toLowerCase().contains(txtBuscar.toLowerCase()))
+                        .collect(Collectors.toList());
+                listaProveedores.clear();
+                listaProveedores.addAll(collection);
+            } else {
+                for (Proveedores e:listaProveedoresOriginal){
+                    if(e.getNombre().toLowerCase().contains(txtBuscar.toLowerCase())){
+                        listaProveedores.add(e);
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

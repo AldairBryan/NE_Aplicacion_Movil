@@ -10,16 +10,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ne_aplicacion_movil.R;
+import com.example.ne_aplicacion_movil.entidades.EstadoRegistro;
 import com.example.ne_aplicacion_movil.entidades.Paises;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListaPaisesAdapter extends RecyclerView.Adapter<ListaPaisesAdapter.PaisViewHolder> {
 
     ArrayList<Paises> listaPaises;
+    ArrayList<Paises> listaPaisesOriginal;
+
     private static int checkedPosition=-1;
     public ListaPaisesAdapter(ArrayList<Paises> listaPaises){
         this.listaPaises= listaPaises;
+        listaPaisesOriginal= new ArrayList<Paises>();
+        listaPaisesOriginal.addAll(listaPaises);
     }
 
     @NonNull
@@ -79,5 +86,28 @@ public class ListaPaisesAdapter extends RecyclerView.Adapter<ListaPaisesAdapter.
             return listaPaises.get(checkedPosition);
         }
         return null;
+    }
+
+    public void filtrado(String txtBuscar){
+        int longitud=txtBuscar.length();
+        if(longitud==0){
+            listaPaises.clear();
+            listaPaises.addAll(listaPaisesOriginal);
+        } else {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                List<Paises> collection=listaPaises.stream()
+                        .filter( i -> i.getNombre().toLowerCase().contains(txtBuscar.toLowerCase()))
+                        .collect(Collectors.toList());
+                listaPaises.clear();
+                listaPaises.addAll(collection);
+            } else {
+                for (Paises e:listaPaisesOriginal){
+                    if(e.getNombre().toLowerCase().contains(txtBuscar.toLowerCase())){
+                        listaPaises.add(e);
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }
