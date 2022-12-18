@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.ne_aplicacion_movil.adaptadores.ListaEstadoRegistroAdapter;
 import com.example.ne_aplicacion_movil.adaptadores.ListaPaisesAdapter;
@@ -54,7 +56,15 @@ public class TablaEstadoRegistro extends AppCompatActivity {
         botonTablaEstadoRegistroEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(adapter.getSelected() != null){
+                    Log.d("INFO",adapter.getSelected().toString());
+                    Context context= view.getContext();
+                    Intent intent=new Intent(context, EditarEstadoRegistro.class);
+                    intent.putExtra("ID",adapter.getSelected().getCodigo());
+                    context.startActivity(intent);
+                } else {
+                    Toast.makeText(TablaEstadoRegistro.this, "No selection",Toast.LENGTH_LONG).show();
+                }
                 actualizarDatos();
             }
         });

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -85,7 +86,15 @@ public class TablaTipoProveedor extends AppCompatActivity {
         botonTablaTipoProveedorEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(adapter.getSelected() != null){
+                    Log.d("INFO",adapter.getSelected().toString());
+                    Context context= view.getContext();
+                    Intent intent=new Intent(context, EditarTipoProveedor.class);
+                    intent.putExtra("ID",adapter.getSelected().getId());
+                    context.startActivity(intent);
+                } else {
+                    Toast.makeText(TablaTipoProveedor.this, "No selection",Toast.LENGTH_LONG).show();
+                }
                 actualizarDatos();
             }
         });
