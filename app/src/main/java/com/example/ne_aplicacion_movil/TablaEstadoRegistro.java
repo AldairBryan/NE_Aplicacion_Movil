@@ -28,9 +28,7 @@ public class TablaEstadoRegistro extends AppCompatActivity {
     RecyclerView listaEstadoRegistro;
     ArrayList<EstadoRegistro> listaArrayEstadoRegistro;
 
-    Button botonTablaEstadoRegistroHabilitar,
-            botonTablaEstadoRegistroInhabilitar,
-            botonTablaEstadoRegistroEditar,
+    Button botonTablaEstadoRegistroEditar,
             botonTablaEstadoRegistroEliminar,
             botonTablaEstadoRegistroCancelar;
 
@@ -39,8 +37,6 @@ public class TablaEstadoRegistro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabla_estado_registro);
 
-        botonTablaEstadoRegistroHabilitar=findViewById(R.id.botonTablaEstadoRegistroHabilitar);
-        botonTablaEstadoRegistroInhabilitar=findViewById(R.id.botonTablaEstadoRegistroInhabilitar);
         botonTablaEstadoRegistroEditar=findViewById(R.id.botonTablaEstadoRegistroEditar);
         botonTablaEstadoRegistroEliminar=findViewById(R.id.botonTablaEstadoRegistroEliminar);
         botonTablaEstadoRegistroCancelar=findViewById(R.id.botonTablaEstadoRegistroCancelar);
@@ -54,21 +50,6 @@ public class TablaEstadoRegistro extends AppCompatActivity {
         ListaEstadoRegistroAdapter adapter=new ListaEstadoRegistroAdapter(dbEstadoRegistro.mostrarEstadosRegistros());
         listaEstadoRegistro.setAdapter(adapter);
 
-        botonTablaEstadoRegistroHabilitar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                actualizarDatos();
-            }
-        });
-
-        botonTablaEstadoRegistroInhabilitar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                actualizarDatos();
-            }
-        });
 
         botonTablaEstadoRegistroEditar.setOnClickListener(new View.OnClickListener() {
             @Override

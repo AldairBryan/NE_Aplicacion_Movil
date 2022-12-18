@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.ne_aplicacion_movil.adaptadores.ListaEstadoRegistroAdapter;
 import com.example.ne_aplicacion_movil.adaptadores.ListaPaisesAdapter;
@@ -27,12 +28,15 @@ public class TablaPais extends AppCompatActivity {
 
     RecyclerView listaPaises;
     ArrayList<Paises> listaArrayPaises;
-
     Button botonTablaPaisHabilitar,
             botonTablaPaisInhabilitar,
             botonTablaPaisEditar,
             botonTablaPaisEliminar,
             botonTablaPaisCancelar;
+
+    DbPaises dbPaises;
+    ListaPaisesAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +52,27 @@ public class TablaPais extends AppCompatActivity {
         listaPaises.setLayoutManager(new LinearLayoutManager(this));
         SpacingItemDecoder itemDecoder= new SpacingItemDecoder(10);
         listaPaises.addItemDecoration(itemDecoder);
-        DbPaises dbPaises=new DbPaises(TablaPais.this);
+
+        //DbPaises dbPaises=new DbPaises(TablaPais.this);
+        dbPaises=new DbPaises(TablaPais.this);
+
         listaArrayPaises=new ArrayList<Paises>();
-        ListaPaisesAdapter adapter=new ListaPaisesAdapter(dbPaises.mostrarPaises());
+
+        //ListaPaisesAdapter adapter=new ListaPaisesAdapter(dbPaises.mostrarPaises());
+        adapter=new ListaPaisesAdapter(dbPaises.mostrarPaises());
+
         listaPaises.setAdapter(adapter);
 
         botonTablaPaisHabilitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                if(adapter.getSelected() != null){
+                    Log.d("INFO",adapter.getSelected().toString());
+                    dbPaises.habilitarRegistro(adapter.getSelected().getId());
+                } else {
+                    Toast.makeText(TablaPais.this, "No selection",Toast.LENGTH_LONG).show();
+                }
                 actualizarDatos();
             }
         });
@@ -64,7 +80,11 @@ public class TablaPais extends AppCompatActivity {
         botonTablaPaisInhabilitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(adapter.getSelected() != null){
+                    dbPaises.inhabilitarRegistro(adapter.getSelected().getId());
+                } else {
+                    Toast.makeText(TablaPais.this, "No selection",Toast.LENGTH_LONG).show();
+                }
                 actualizarDatos();
             }
         });
@@ -80,7 +100,11 @@ public class TablaPais extends AppCompatActivity {
         botonTablaPaisEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(adapter.getSelected() != null){
+                    dbPaises.eliminarRegistro(adapter.getSelected().getId());
+                } else {
+                    Toast.makeText(TablaPais.this, "No selection",Toast.LENGTH_LONG).show();
+                }
                 actualizarDatos();
             }
         });

@@ -54,4 +54,6 @@ public class DbEstadoRegistro extends  DbHelper{
         cursorEstadoRegistro.close();
         return  listaEstadosRegistros;
     }
+
+
 }

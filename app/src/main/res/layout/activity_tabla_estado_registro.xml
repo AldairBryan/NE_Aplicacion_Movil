@@ -17,17 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.001" />
 
-    <Button
-        android:id="@+id/botonTablaEstadoRegistroInhabilitar"
-        android:layout_width="150sp"
-        android:layout_height="wrap_content"
-        android:text="Inhabilitar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.938"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.825" />
+
 
     <Button
         android:id="@+id/botonTablaEstadoRegistroEliminar"
@@ -52,17 +42,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.929" />
 
-    <Button
-        android:id="@+id/botonTablaEstadoRegistroHabilitar"
-        android:layout_width="150sp"
-        android:layout_height="wrap_content"
-        android:text="Habilitar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.825" />
+
 
     <Button
         android:id="@+id/botonTablaEstadoRegistroEditar"
