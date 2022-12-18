@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class ListaProveedoresAdapter extends RecyclerView.Adapter<ListaProveedoresAdapter.ProveedoresViewHolder> {
 
     ArrayList<Proveedores> listaProveedores;
-    private int checkedPosition=-1;
+    private static int checkedPosition=-1;
     public ListaProveedoresAdapter(ArrayList<Proveedores> listaProveedores){
         this.listaProveedores= listaProveedores;
     }

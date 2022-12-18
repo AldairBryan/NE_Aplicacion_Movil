@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class ListaPaisesAdapter extends RecyclerView.Adapter<ListaPaisesAdapter.PaisViewHolder> {
 
     ArrayList<Paises> listaPaises;
-    private int checkedPosition=-1;
+    private static int checkedPosition=-1;
     public ListaPaisesAdapter(ArrayList<Paises> listaPaises){
         this.listaPaises= listaPaises;
     }

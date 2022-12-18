@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class ListaEstadoRegistroAdapter extends RecyclerView.Adapter<ListaEstadoRegistroAdapter.EstadoRegistroViewHolder> {
 
     ArrayList<EstadoRegistro> listaEstadoRegistro;
-    private int checkedPosition=-1;
+    private static int checkedPosition=-1;
     public ListaEstadoRegistroAdapter(ArrayList<EstadoRegistro> listaEstadoRegistro){
         this.listaEstadoRegistro= listaEstadoRegistro;
     }

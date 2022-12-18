@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class ListaTipoProveedorAdapter extends RecyclerView.Adapter<ListaTipoProveedorAdapter.TipoProveedorViewHolder> {
     ArrayList<TipoProveedores> listaTipoProveedores;
-    private int checkedPosition=-1;
+    private static int checkedPosition=-1;
     public ListaTipoProveedorAdapter(ArrayList<TipoProveedores> listaTipoProveedores){
         this.listaTipoProveedores= listaTipoProveedores;
     }
