@@ -61,6 +61,9 @@ public class DbProveedores extends DbHelper {
                 proveedores.setTipoProveedor(cursorProveedores.getString(3));
                 proveedores.setPais(cursorProveedores.getString(4));
                 proveedores.setEstadoRegistro(cursorProveedores.getString(5));
+
+                proveedores.setTipoProveedorNombre(this.getTipoProveedorNombre(Integer.parseInt(proveedores.getTipoProveedor())));
+                proveedores.setPaisNombre(this.getPaisNombre(Integer.parseInt(proveedores.getPais())));
                 listaProveedores.add(proveedores);
             } while (cursorProveedores.moveToNext());
         }
@@ -199,5 +202,40 @@ public class DbProveedores extends DbHelper {
         }
         cursorProveedores.close();
         return  proveedores;
+    }
+
+    public String getPaisNombre(int id){
+        DbHelper dbHelper= new DbHelper(context);
+        SQLiteDatabase db=dbHelper.getWritableDatabase();
+
+        Paises paises=null;
+        Cursor cursorPaises=null;
+
+        cursorPaises = db.rawQuery("SELECT * FROM "+TABLE_PAISES    +" WHERE idpais='"+id+"'",null);
+        if (cursorPaises.moveToFirst()){
+            paises=new Paises();
+            paises.setId(cursorPaises.getInt(0));
+            paises.setNombre(cursorPaises.getString(1));
+            paises.setEstadoRegistro(cursorPaises.getString(2));
+        }
+        cursorPaises.close();
+        return  paises.getNombre();
+    }
+    public String getTipoProveedorNombre(int id){
+        DbHelper dbHelper= new DbHelper(context);
+        SQLiteDatabase db=dbHelper.getWritableDatabase();
+
+        TipoProveedores tipoProveedores=null;
+        Cursor cursorTipoProveedores=null;
+
+        cursorTipoProveedores = db.rawQuery("SELECT * FROM "+TABLE_TIPO_PROVEEDORES    +" WHERE idtipo_proveedor='"+id+"'",null);
+        if (cursorTipoProveedores.moveToFirst()){
+            tipoProveedores=new TipoProveedores();
+            tipoProveedores.setId(cursorTipoProveedores.getInt(0));
+            tipoProveedores.setNombre(cursorTipoProveedores.getString(1));
+            tipoProveedores.setEstadoRegistro(cursorTipoProveedores.getString(2));
+        }
+        cursorTipoProveedores.close();
+        return  tipoProveedores.getNombre();
     }
 }

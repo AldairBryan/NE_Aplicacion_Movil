@@ -36,8 +36,10 @@ public class ListaProveedoresAdapter extends RecyclerView.Adapter<ListaProveedor
         holder.viewIdProveedor.setText("ID: "+listaProveedores.get(position).getId()+"");
         holder.viewNombreProveedor.setText("Proveedor: "+listaProveedores.get(position).getNombre());
         holder.viewRUCProveedor.setText("RUC: "+listaProveedores.get(position).getRUC()+"");
-        holder.viewFKTPProveedor.setText("Tipo Prov: "+listaProveedores.get(position).getTipoProveedor()+"");
-        holder.viewFKPaisProveedor.setText("Pais: "+listaProveedores.get(position).getPais()+"");
+        holder.viewFKTPProveedor.setText("ID: "+listaProveedores.get(position).getTipoProveedor()+
+                "   Tipo Prov: "+listaProveedores.get(position).getTipoProveedorNombre()+"");
+        holder.viewFKPaisProveedor.setText("ID: "+listaProveedores.get(position).getPais()+
+                "   Pais: "+listaProveedores.get(position).getPaisNombre()+"");
         holder.viewERProveedor.setText("Estado R: "+listaProveedores.get(position).getEstadoRegistro()+"");
         if(checkedPosition == -1){
             holder.imageCheck.setVisibility(View.GONE);
