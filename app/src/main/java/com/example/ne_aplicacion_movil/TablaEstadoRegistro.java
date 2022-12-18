@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,8 +73,23 @@ public class TablaEstadoRegistro extends AppCompatActivity {
         botonTablaEstadoRegistroEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AlertDialog.Builder builder= new AlertDialog.Builder(TablaEstadoRegistro.this);
+                builder.setMessage("¿Desea eliminar este Estado de Registro?")
+                        .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(dbEstadoRegistro.eliminarRegistro(adapter.getSelected().getCodigo())){
+                                    actualizarDatos();
+                                }
+                            }
+                        })
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
 
-                actualizarDatos();
+                            }
+                        }).show();
+
             }
         });
 

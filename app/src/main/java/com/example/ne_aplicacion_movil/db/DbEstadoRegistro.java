@@ -87,4 +87,20 @@ public class DbEstadoRegistro extends  DbHelper{
         cursorEstadoRegistro.close();
         return  estadoRegistro;
     }
+
+    public boolean eliminarRegistro(String codigo){
+        boolean correcto=false;
+        DbHelper dbHelper= new DbHelper(context);
+        SQLiteDatabase db=dbHelper.getWritableDatabase();
+        try {
+            db.execSQL("DELETE FROM "+TABLE_ESTADO_REGISTRO+" WHERE codigo='"+codigo+"'");
+            correcto=true;
+        } catch(Exception e){
+            e.toString();
+            correcto=false;
+        } finally {
+            db.close();
+        }
+        return  correcto;
+    }
 }
