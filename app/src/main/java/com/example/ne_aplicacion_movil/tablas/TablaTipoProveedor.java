@@ -174,7 +174,7 @@ public class TablaTipoProveedor extends AppCompatActivity implements SearchView.
 
     private void actualizarDatos(){
         DbTipoProveedores dbTipoProveedores=new DbTipoProveedores(TablaTipoProveedor.this);
-        ListaTipoProveedorAdapter adapter=new ListaTipoProveedorAdapter(dbTipoProveedores.mostrarTiposProveedores());
+        adapter=new ListaTipoProveedorAdapter(dbTipoProveedores.mostrarTiposProveedores());
         listaTipoProveedor.setAdapter(adapter);
     }
 

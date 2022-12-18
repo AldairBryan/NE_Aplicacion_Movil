@@ -176,7 +176,7 @@ public class TablaProveedor extends AppCompatActivity implements SearchView.OnQu
 
     private void actualizarDatos(){
         DbProveedores dbProveedores=new DbProveedores(TablaProveedor.this);
-        ListaProveedoresAdapter adapter=new ListaProveedoresAdapter(dbProveedores.mostrarProveedores());
+        adapter=new ListaProveedoresAdapter(dbProveedores.mostrarProveedores());
         listaProveedor.setAdapter(adapter);
     }
 

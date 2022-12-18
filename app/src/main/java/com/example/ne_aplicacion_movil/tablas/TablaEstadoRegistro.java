@@ -143,7 +143,7 @@ public class TablaEstadoRegistro extends AppCompatActivity implements SearchView
 
     private void actualizarDatos(){
         DbEstadoRegistro dbEstadoRegistro=new DbEstadoRegistro(TablaEstadoRegistro.this);
-        ListaEstadoRegistroAdapter adapter=new ListaEstadoRegistroAdapter(dbEstadoRegistro.mostrarEstadosRegistros());
+        adapter=new ListaEstadoRegistroAdapter(dbEstadoRegistro.mostrarEstadosRegistros());
         listaEstadoRegistro.setAdapter(adapter);
     }
 

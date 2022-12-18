@@ -178,7 +178,7 @@ public class TablaPais extends AppCompatActivity implements SearchView.OnQueryTe
 
     private void actualizarDatos(){
         DbPaises dbPaises=new DbPaises(TablaPais.this);
-        ListaPaisesAdapter adapter=new ListaPaisesAdapter(dbPaises.mostrarPaises());
+        adapter=new ListaPaisesAdapter(dbPaises.mostrarPaises());
         listaPaises.setAdapter(adapter);
     }
 
