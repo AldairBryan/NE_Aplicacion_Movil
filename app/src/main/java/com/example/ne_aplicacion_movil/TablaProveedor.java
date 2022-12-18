@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.ne_aplicacion_movil.adaptadores.ListaEstadoRegistroAdapter;
 import com.example.ne_aplicacion_movil.adaptadores.ListaPaisesAdapter;
@@ -58,7 +59,12 @@ public class TablaProveedor extends AppCompatActivity {
         botonTablaProveedorHabilitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(adapter.getSelected() != null){
+                    Log.d("INFO",adapter.getSelected().toString());
+                    dbProveedores.habilitarRegistro(adapter.getSelected().getId());
+                } else {
+                    Toast.makeText(TablaProveedor.this, "No selection",Toast.LENGTH_LONG).show();
+                }
                 actualizarDatos();
             }
         });
@@ -66,7 +72,12 @@ public class TablaProveedor extends AppCompatActivity {
         botonTablaProveedorInhabilitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(adapter.getSelected() != null){
+                    Log.d("INFO",adapter.getSelected().toString());
+                    dbProveedores.inhabilitarRegistro(adapter.getSelected().getId());
+                } else {
+                    Toast.makeText(TablaProveedor.this, "No selection",Toast.LENGTH_LONG).show();
+                }
                 actualizarDatos();
             }
         });
@@ -82,7 +93,12 @@ public class TablaProveedor extends AppCompatActivity {
         botonTablaProveedorEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(adapter.getSelected() != null){
+                    Log.d("INFO",adapter.getSelected().toString());
+                    dbProveedores.eliminarRegistro(adapter.getSelected().getId());
+                } else {
+                    Toast.makeText(TablaProveedor.this, "No selection",Toast.LENGTH_LONG).show();
+                }
                 actualizarDatos();
             }
         });

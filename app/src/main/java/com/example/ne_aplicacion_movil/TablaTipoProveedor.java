@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.ne_aplicacion_movil.adaptadores.ListaEstadoRegistroAdapter;
 import com.example.ne_aplicacion_movil.adaptadores.ListaPaisesAdapter;
@@ -57,7 +58,12 @@ public class TablaTipoProveedor extends AppCompatActivity {
         botonTablaTipoProveedorHabilitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(adapter.getSelected() != null){
+                    Log.d("INFO",adapter.getSelected().toString());
+                    dbTipoProveedores.habilitarRegistro(adapter.getSelected().getId());
+                } else {
+                    Toast.makeText(TablaTipoProveedor.this, "No selection",Toast.LENGTH_LONG).show();
+                }
 
                 actualizarDatos();
             }
@@ -66,7 +72,12 @@ public class TablaTipoProveedor extends AppCompatActivity {
         botonTablaTipoProveedorInhabilitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(adapter.getSelected() != null){
+                    Log.d("INFO",adapter.getSelected().toString());
+                    dbTipoProveedores.inhabilitarRegistro(adapter.getSelected().getId());
+                } else {
+                    Toast.makeText(TablaTipoProveedor.this, "No selection",Toast.LENGTH_LONG).show();
+                }
                 actualizarDatos();
             }
         });
@@ -82,7 +93,12 @@ public class TablaTipoProveedor extends AppCompatActivity {
         botonTablaTipoProveedorEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(adapter.getSelected() != null){
+                    Log.d("INFO",adapter.getSelected().toString());
+                    dbTipoProveedores.eliminarRegistro(adapter.getSelected().getId());
+                } else {
+                    Toast.makeText(TablaTipoProveedor.this, "No selection",Toast.LENGTH_LONG).show();
+                }
                 actualizarDatos();
             }
         });
